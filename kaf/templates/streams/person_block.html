@@ -1,0 +1,12 @@
+{% load wagtailimages_tags %}
+
+{% image self.photo width-400 as img %}
+<div class="container mb-sm-5 mt-sm-5">
+    <div class="row">
+    <img src="{{ img.url }}" alt="{{ img.alt }}">
+        <div class="col-lg-12">
+            {{ self.first_name }} {{ self.last_name }}
+            {{ self.bio }}
+        </div>
+    </div>
+</div> 
