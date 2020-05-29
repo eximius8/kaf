@@ -1,20 +1,21 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
-{% block content %}
-    {{ self.subtitle }} is the subtitle
-    <div class="jumbotron">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                    <h1 class="display-4">{{ self.title }}</h1>
-                   
-                </div>
-            </div>
+
+{% block content %}    
+    <div class="row my-4">
+        <div class="col-lg-3">
+            {% image self.photo fill-240x240 as img %}
+            <img class="rounded-circle" src="{{ img.url }}" alt="{{ img.alt }}" width="240" height="240">
+        </div>
+        <div class="col-lg-9">
+            <h2>{{ self.title }}</h2>
+            <div><strong>Должность:</strong> {{ self.position }}</div>
+            {% if self.degree %}<div><strong>Степень:</strong> {{ self.degree }}</div>{% endif %}
+            <div><strong>Образование:</strong> {{ self.education }}</div>
+            <div><strong>Email:</strong> <a href="mailto:{{ self.email }}">{{ self.email }}</a></div>
+            <h3>Информация</h3>             
+            {{ self.bio|richtext }}            
         </div>
     </div>
-
-    {% for block in page.body %}
-        {% include_block block %}
-    {% endfor %}
 {% endblock %} 

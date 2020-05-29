@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load wagtailimages_tags %}
+
+{% block content %}
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">{{ self.title }}</h1>
+        <p class="lead">{{ self.subtitle }}</p>
+    </div>
+
+    <div class="row align-items-top text-center">
+        {% for person in people %}
+            <div class="col-lg-4">
+                {% image person.photo fill-140x140 as img %}
+                <img class="rounded-circle" src="{{ img.url }}" alt="{{ img.alt }}" width="140" height="140">
+                <h2><a href="{{ person.url }}" class="stretched-link">{{ person.title }}</a></h2>
+                <p>{{ person.position }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock content %}
