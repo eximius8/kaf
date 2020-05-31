@@ -51,6 +51,8 @@ class PersonListPage(Page):
     template = "people/person_list.html"
     subtitle = models.CharField(max_length = 300, blank = False, null = False, verbose_name='Наш девиз')
 
+    subpage_types = ['people.PersonDetailPage']
+
     def get_context(self, request, *args, **kwargs):
         """Custom stuff to page"""
         context = super().get_context(request, *args, **kwargs)

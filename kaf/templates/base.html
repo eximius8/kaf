@@ -39,7 +39,7 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/news/">Новости</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/people/">Сотрудники</a>
@@ -48,21 +48,24 @@
                     <a class="nav-link" href="/equipment/">Лаборатория</a>
                 </li>
                 </ul>
-                <span class="navbar-text">
-                Navbar text with an inline element
-                </span>
+                {% comment %} <span class="navbar-text">
+                Безопасность жизнедеятельности в строительстве и городском хозяйстве
+                </span> {% endcomment %}
             </div>
         </nav>
 
-        <main class="container">
+        <main class="container pb-4">
             {% block content %}{% endblock content %}     
         </main>
 
-        <footer class="footer">
-            <div class="container">
-                <span class="text-muted">Place sticky footer content here.</span>
+        <footer class="footer container-fluid">
+            <div class="row">
+                <div class="col-md-3"><a href="http://vstu.ru" target="_blank">сайт ВолгГТУ</a></div>
+                <div class="col-md-3"><a href="http://vgasu.ru" target="_blank">сайт ИАиС</a></div>
+                <div class="col-md-3">Автор сайта: <a href="http://vgasu.ru" target="_blank">Мишка Трунов</a></div>
+                <div class="col-md-3"><a href="https://wagtail.io" target="_blank">Wagtail</a> & <a target="_blank" href="https://getbootstrap.com/">bootstrap</a></div>
             </div>
-        </footer>
+        </footer> 
 
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/kaf.js' %}"></script>

@@ -30,7 +30,8 @@ SECRET_KEY = os.environ.get('KAF_SECRET_KEY')
 INSTALLED_APPS = [
     'home',
     'search',
-    'streams',    
+    'streams',
+    'blog',    
     'people',
 
     'wagtail.contrib.forms',
@@ -126,7 +127,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Volgograd'
 
 USE_I18N = True
 
