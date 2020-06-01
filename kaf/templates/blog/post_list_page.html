@@ -10,19 +10,7 @@
 
     <div class="card-columns">    
         {% for post in posts %}
-            {% image post.image fill-600x180 as img %}
-            
-                <div class="card mx-0">
-                    <img class="card-img-top mx-0" src="{{ img.url }}" alt="{{ img.alt }}">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="{{ post.url }}" class="stretched-link">{{ post.title }}</a></h5>
-                        <p class="card-text">{{ post.subtitle }}</p>                                        
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Дата публикации: {{ post.first_published_at }}</small>
-                    </div>
-                </div>
-           
+           {% include "blog/blog_post_card.html" %}           
         {% endfor %}
     </div>
     {% if posts.paginator.num_pages > 1 %}

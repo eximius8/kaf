@@ -1,0 +1,21 @@
+{% load wagtailimages_tags %}
+
+{% image post.image fill-600x180 as img %}
+<div class="card mx-0">
+    <img class="card-img-top mx-0" src="{{ img.url }}" alt="{{ img.alt }}">
+    <div class="card-body">
+        <h5 class="card-title"><a href="{{ post.url }}" class="stretched-link">{{ post.title }}</a></h5>
+        <p class="card-text">{{ post.subtitle }}</p>
+    </div>
+    {% if post.categories.all %}
+        <div class="p-2">
+            <span class="text-muted">Категории: </span>                           
+            {% for cat in post.categories.all %}                                    
+                <span class="badge badge-secondary">{{ cat.name }} </span>                                
+            {% endfor %}                            
+        </div>
+    {% endif %}
+    <div class="card-footer">
+        <small class="text-muted">Дата публикации: {{ post.first_published_at }}</small>
+    </div>
+</div>
