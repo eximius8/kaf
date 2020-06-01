@@ -17,7 +17,7 @@ class PostListPage(Page):
 
     subtitle = models.CharField(max_length = 200, null = True, blank = True)
     content_panels = Page.content_panels + [
-        FieldPanel("subtitle"), 
+        FieldPanel("subtitle"),
     ]
 
 
@@ -26,7 +26,7 @@ class PostListPage(Page):
         context = super().get_context(request, *args, **kwargs)
         context['posts'] = PostPage.objects.live().public().order_by('created_at')
 
-        return context   
+        return context
 
 
 
@@ -34,32 +34,30 @@ class PostPage(Page):
     """Model for page with a post"""
 
     template = 'blog/post_page.html'
-    date = models.DateField("Дата публикации", auto_now=True)
+    date = models.DateTimeField("Дата публикации", auto_now=True)
 
-    subtitle = models.CharField(max_length = 200, null = True, blank = True)    
+    subtitle = models.CharField(max_length = 200, null = True, blank = True)
     image = models.ForeignKey(
         "wagtailimages.Image",
-        blank=True, 
+        blank=True,
         null=True,
         related_name="+",
         on_delete=models.SET_NULL,
     )
-   
+
     content = StreamField(
         [
-            ("description", blocks.SimpleRichtextBlock()), 
+            ("description", blocks.SimpleRichtextBlock()),
             ("ctablock", blocks.CTABlock()),
             ("cardblock", blocks.CardBlock()),
         ],
         null=True,
         blank=True,
-    )  
+    )
 
     content_panels = Page.content_panels + [
         FieldPanel("subtitle"),
-             
+
         ImageChooserPanel("image"),
         StreamFieldPanel("content"),
-    ] 
-    
-
+    ]
