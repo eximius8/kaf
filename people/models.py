@@ -14,6 +14,8 @@ from streams import blocks
 class PersonDetailPage(Page):
     """Class for every person on kaf"""
 
+    subpage_types = []
+
     template = "people/person.html"    
     degree = models.CharField(max_length = 50, blank = True, null = True, help_text='Степень')
     education = models.CharField(max_length = 200, blank = True, null = True, help_text='Образование')
@@ -52,6 +54,7 @@ class PersonListPage(Page):
     subtitle = models.CharField(max_length = 300, blank = False, null = False, verbose_name='Наш девиз')
 
     subpage_types = ['people.PersonDetailPage']
+    max_count = 1
 
     def get_context(self, request, *args, **kwargs):
         """Custom stuff to page"""

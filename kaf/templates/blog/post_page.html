@@ -6,6 +6,8 @@
     {% image self.image fill-1200x300 as banner %}
     <img src="{{ banner.url }}" alt="{{ banner.alt }}" style='width: 100%; height: auto;'>
 
+    <h3 class="my-2">{{ self.title }}</h3>
+    <h5>{{ self.subtitle }}</h5>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 offset-lg-2">
@@ -15,5 +17,5 @@
             </div>
         </div>
     </div>
-    <div>{{ self.date }}</div>
+    <div>{{ self.first_published_at }}</div>
 {% endblock %}

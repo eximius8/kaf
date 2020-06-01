@@ -17,6 +17,8 @@ class PostListPage(Page):
 
     subpage_types = ['blog.PostPage',]
 
+    max_count = 1
+
     subtitle = models.CharField(max_length = 200, null = True, blank = True)
     content_panels = Page.content_panels + [
         FieldPanel("subtitle"),
@@ -26,7 +28,18 @@ class PostListPage(Page):
     def get_context(self, request, *args, **kwargs):
         """Custom stuff to page"""
         context = super().get_context(request, *args, **kwargs)
-        context['posts'] = PostPage.objects.live().public().order_by('-first_published_at')
+        all_posts = PostPage.objects.live().public().order_by('-first_published_at')
+        paginator = Paginator(all_posts, 9)
+        page = request.GET.get("page")
+
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+
+        context["posts"] = posts
 
         return context
 
@@ -37,6 +50,7 @@ class PostPage(Page):
 
     template = 'blog/post_page.html'
 
+    subpage_types = []
 
     subtitle = models.CharField(max_length = 200, null = True, blank = True)
     image = models.ForeignKey(

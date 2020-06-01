@@ -2,20 +2,16 @@ from django.db import models
 
 from wagtail.core.models import Page, Orderable
 
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-
 from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, MultiFieldPanel, InlinePanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.core.fields import RichTextField
-
-
 from modelcluster.fields import ParentalKey
 
 from blog.models import PostPage
 
 
 class HomePage(Page):
-    subpage_types = ['home.EquipmentListPage', 'people.PersonListPage', 'blog.PostListPage', 'blog.PostPage']
+    subpage_types = ['home.EquipmentListPage', 'people.PersonListPage', 'blog.PostListPage']
 
     max_count = 1
 
@@ -28,19 +24,8 @@ class HomePage(Page):
     def get_context(self, request, *args, **kwargs):
         """Custom stuff to page"""
         context = super().get_context(request, *args, **kwargs)
-        all_posts = PostPage.objects.live().public().order_by('-first_published_at')
 
-        paginator = Paginator(all_posts, 9)
-
-        page = request.GET.get("page")
-        try:
-            posts = paginator.page(page)
-        except PageNotAnInteger:
-            posts = paginator.page(1)
-        except EmptyPage:
-            posts = paginator.page(paginator.num_pages)
-
-        context['posts'] = posts
+        context['posts'] = PostPage.objects.live().public().order_by('-first_published_at')[:9]
 
         return context
 
@@ -68,6 +53,7 @@ class EquipmentDetailPage(Page):
     """Class for every person on kaf"""
 
     template = "equipment/tool.html"
+    subpage_types = []
     description = RichTextField(
         blank = False,
         null = True,
@@ -90,6 +76,7 @@ class EquipmentListPage(Page):
     subtitle = models.CharField(max_length = 300, blank = False, null = False, verbose_name='Коротко про оборудование')
 
     subpage_types = ['home.EquipmentDetailPage']
+    max_count = 1
 
     def get_context(self, request, *args, **kwargs):
         """Custom stuff to page"""
