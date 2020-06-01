@@ -2,6 +2,8 @@ from django.db import models
 
 from wagtail.core.models import Page, Orderable
 
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+
 from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, MultiFieldPanel, InlinePanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.core.fields import RichTextField
@@ -19,23 +21,35 @@ class HomePage(Page):
 
     subtitle = models.CharField(max_length = 200, null = True, blank = True)
     content_panels = Page.content_panels + [
-        FieldPanel("subtitle"), 
+        FieldPanel("subtitle"),
     ]
 
 
     def get_context(self, request, *args, **kwargs):
         """Custom stuff to page"""
         context = super().get_context(request, *args, **kwargs)
-        context['posts'] = PostPage.objects.live().public().order_by('-date')
+        all_posts = PostPage.objects.live().public().order_by('-first_published_at')
 
-        return context   
+        paginator = Paginator(all_posts, 9)
+
+        page = request.GET.get("page")
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+
+        context['posts'] = posts
+
+        return context
 
 
 class EquipmentCarouselImages(Orderable):
 
     page = ParentalKey('home.EquipmentDetailPage', related_name='carousel_images')
 
-    carousel_image = models.ForeignKey(        
+    carousel_image = models.ForeignKey(
         'wagtailimages.Image',
         null = True,
         blank = False,
@@ -55,15 +69,15 @@ class EquipmentDetailPage(Page):
 
     template = "equipment/tool.html"
     description = RichTextField(
-        blank = False, 
-        null = True, 
+        blank = False,
+        null = True,
         verbose_name='Описание',
-        features=['h3', 'h4', 'bold', 'italic', 'link', 'ol', 'ul', 'embed', 'hr', 'superscript', 'subscript', 'strikethrough'], 
+        features=['h3', 'h4', 'bold', 'italic', 'link', 'ol', 'ul', 'embed', 'hr', 'superscript', 'subscript', 'strikethrough'],
         help_text='Общая информация'
-    )    
-    
+    )
+
     content_panels = Page.content_panels + [
-        FieldPanel('description'), 
+        FieldPanel('description'),
         MultiFieldPanel([
                 InlinePanel('carousel_images', max_num=4, min_num=1, label="Image")
             ], heading="Фото оборудования"),
@@ -74,7 +88,7 @@ class EquipmentListPage(Page):
 
     template = "equipment/equipment_list.html"
     subtitle = models.CharField(max_length = 300, blank = False, null = False, verbose_name='Коротко про оборудование')
-    
+
     subpage_types = ['home.EquipmentDetailPage']
 
     def get_context(self, request, *args, **kwargs):
@@ -82,8 +96,8 @@ class EquipmentListPage(Page):
         context = super().get_context(request, *args, **kwargs)
         context['tools'] = EquipmentDetailPage.objects.live().public()
 
-        return context   
+        return context
 
-    content_panels = Page.content_panels + [        
+    content_panels = Page.content_panels + [
         FieldPanel('subtitle'),
     ]

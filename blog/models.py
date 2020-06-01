@@ -3,6 +3,8 @@ from django.db import models
 from wagtail.core.models import Page
 #from wagtail.core.fields import StreamField
 
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+
 from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, MultiFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.core.fields import RichTextField, StreamField
@@ -24,7 +26,7 @@ class PostListPage(Page):
     def get_context(self, request, *args, **kwargs):
         """Custom stuff to page"""
         context = super().get_context(request, *args, **kwargs)
-        context['posts'] = PostPage.objects.live().public().order_by('created_at')
+        context['posts'] = PostPage.objects.live().public().order_by('-first_published_at')
 
         return context
 
@@ -34,7 +36,7 @@ class PostPage(Page):
     """Model for page with a post"""
 
     template = 'blog/post_page.html'
-    date = models.DateTimeField("Дата публикации", auto_now=True)
+
 
     subtitle = models.CharField(max_length = 200, null = True, blank = True)
     image = models.ForeignKey(
