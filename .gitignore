@@ -10,7 +10,7 @@ Icon
 # Hide app.yaml
 #app.yaml
 # local running
-manage.py
+#manage.py
 Dockerfile
 setup.py
 
