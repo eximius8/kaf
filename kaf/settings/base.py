@@ -18,7 +18,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('KAF_SECRET_KEY')
+
 
 
 # Quick-start development settings - unsuitable for production
