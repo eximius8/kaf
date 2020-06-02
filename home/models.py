@@ -8,6 +8,7 @@ from wagtail.core.fields import RichTextField
 from modelcluster.fields import ParentalKey
 
 from blog.models import PostPage
+from blog.models import BlogCategory
 
 
 class HomePage(Page):
@@ -26,6 +27,7 @@ class HomePage(Page):
         context = super().get_context(request, *args, **kwargs)
 
         context['posts'] = PostPage.objects.live().public().order_by('-first_published_at')[:9]
+        context["categories"] = BlogCategory.objects.all()
 
         return context
 

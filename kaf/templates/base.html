@@ -38,13 +38,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item{% if 'news' in request.path %} active{% endif %}">
                     <a class="nav-link" href="/news/">Новости</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item{% if 'people' in request.path %} active{% endif %}">
                     <a class="nav-link" href="/people/">Сотрудники</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item{% if 'equipment' in request.path %} active{% endif %}">
                     <a class="nav-link" href="/equipment/">Лаборатория</a>
                 </li>
                 </ul>
@@ -60,10 +60,10 @@
 
         <footer class="footer container-fluid">
             <div class="row">
-                <div class="col-md-3"><a href="http://vstu.ru" target="_blank">сайт ВолгГТУ</a></div>
-                <div class="col-md-3"><a href="http://vgasu.ru" target="_blank">сайт ИАиС</a></div>
-                <div class="col-md-3">Автор сайта: <a href="http://vgasu.ru" target="_blank">Мишка Трунов</a></div>
-                <div class="col-md-3"><a href="https://wagtail.io" target="_blank">Wagtail</a> & <a target="_blank" href="https://getbootstrap.com/">bootstrap</a></div>
+                <div class="col-md-3 text-center"><a href="http://vstu.ru" target="_blank">сайт ВолгГТУ</a></div>
+                <div class="col-md-3 text-center"><a href="http://vgasu.ru" target="_blank">сайт ИАиС</a></div>
+                <div class="col-md-3 text-center">Автор сайта: <a href="http://vgasu.ru" target="_blank">Мишка Трунов</a></div>
+                <div class="col-md-3 text-center"><a href="https://wagtail.io" target="_blank">Wagtail</a> & <a target="_blank" href="https://getbootstrap.com/">bootstrap</a></div>
             </div>
         </footer> 
 

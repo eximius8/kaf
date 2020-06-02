@@ -59,6 +59,9 @@ class PostListPage(Page):
 
         page = request.GET.get("page")
         category = request.GET.get("category")
+        if category and BlogCategory.objects.filter(slug=category).exists():
+
+            all_posts = all_posts.filter(categories__slug = category)
 
         paginator = Paginator(all_posts, 9)
 
@@ -70,6 +73,7 @@ class PostListPage(Page):
             posts = paginator.page(paginator.num_pages)
 
         context["posts"] = posts
+        context["categories"] = BlogCategory.objects.all()       
 
         return context
 
