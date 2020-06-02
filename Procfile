@@ -1,0 +1,1 @@
+web: gunicorn kaf.wsgi --log-file -
