@@ -21,4 +21,3 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 
 #env = os.environ.copy()
-SECRET_KEY = "a#yv!z8j(lmrffxxl^+9t!mr)izbrf)7n2cx9(+c$tp1!)j*e5"
