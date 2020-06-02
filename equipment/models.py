@@ -65,7 +65,14 @@ class EquipmentListPage(Page):
     def get_context(self, request, *args, **kwargs):
         """Custom stuff to page"""
         context = super().get_context(request, *args, **kwargs)
-        context['tools'] = EquipmentDetailPage.objects.live().public()
+        
+        all_tools = EquipmentDetailPage.objects.live().public()        
+        category = request.GET.get("category")
+
+        if category and EquipmentCategory.objects.filter(slug=category).exists():
+            all_tools = all_tools.filter(categories__slug = category)
+        context['categories'] = EquipmentCategory.objects.all()
+        context['tools'] = all_tools
 
         return context
     
@@ -78,7 +85,7 @@ class EquipmentListPage(Page):
 class EquipmentCategory(models.Model):
     """Equipment category snippet"""
 
-    name = models.CharField(max_length = 20)
+    name = models.CharField(max_length = 200)
     slug = models.SlugField(
         verbose_name='slug',
         allow_unicode=False,
