@@ -9,7 +9,7 @@ ALLOWED_HOSTS = ['*']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-#SECRET_KEY = os.environ.get('KAF_SECRET_KEY')
+SECRET_KEY = os.environ.get('KAF_SECRET_KEY')
 
 try:
     from .local import *

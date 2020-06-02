@@ -1,8 +1,10 @@
 from __future__ import absolute_import, unicode_literals
-
 import os
 from .base import *
 import dj_database_url
+
+env = os.environ.copy()
+SECRET_KEY = env['KAF_SECRET_KEY']
 
 DEBUG = False
 
@@ -20,4 +22,4 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 
-#env = os.environ.copy()
+
