@@ -3,11 +3,11 @@ import os
 from .base import *
 import dj_database_url
 
-env = os.environ.copy()
+
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DEBUG = False
+DEBUG = True
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
