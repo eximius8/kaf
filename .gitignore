@@ -23,12 +23,12 @@ setup.py
 
 herr
 
-media/
-static/
+/media/
+/static/
 staticfiles/
 
 /env/
-/static/
+
 /media/
 /staticfiles/
 
