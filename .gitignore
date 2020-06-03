@@ -23,6 +23,10 @@ setup.py
 media/
 static/
 
+/env/
+/static/
+/media/
+
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
