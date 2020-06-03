@@ -3,7 +3,7 @@ import os
 from .base import *
 import dj_database_url
 
-DEBUG = False
+DEBUG = True
 # SECURITY WARNING: define the correct hosts in production!
 ALLOWED_HOSTS = ['bgd-vstu.herokuapp.com'] 
 
