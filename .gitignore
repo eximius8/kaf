@@ -25,10 +25,12 @@ herr
 
 media/
 static/
+staticfiles/
 
 /env/
 /static/
 /media/
+/staticfiles/
 
 # Files that might appear on external disk
 .Spotlight-V100
