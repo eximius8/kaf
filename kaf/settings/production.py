@@ -3,13 +3,9 @@ import os
 from .base import *
 import dj_database_url
 
-
-
-SECRET_KEY = os.environ.get('SECRET_KEY')
-
-DEBUG = True
+DEBUG = False
 # SECURITY WARNING: define the correct hosts in production!
-ALLOWED_HOSTS = ['*'] 
+ALLOWED_HOSTS = ['bgd-vstu.herokuapp.com'] 
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
