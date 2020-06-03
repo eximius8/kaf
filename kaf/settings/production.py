@@ -7,7 +7,7 @@ DEBUG = True
 # SECURITY WARNING: define the correct hosts in production!
 ALLOWED_HOSTS = ['bgd-vstu.herokuapp.com'] 
 
-#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 COMPRESS_OFFLINE = True
 COMPRESS_CSS_FILTERS = [
