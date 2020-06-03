@@ -4,7 +4,7 @@ from .base import *
 import dj_database_url
 
 env = os.environ.copy()
-SECRET_KEY = env['KAF_SECRET_KEY']
+SECRET_KEY = env['SECRET_KEY']
 
 DEBUG = False
 
